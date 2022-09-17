@@ -1,10 +1,10 @@
-FROM ubuntu:20.04
+FROM debian
 
-ARG KKMSERVER_VERSION=2.1.40.71_22.06.2021
+ARG KKMSERVER_VERSION=2.2.15.28_14.09.2022
 ARG KKMSERVER_STUFF=KkmServer_$KKMSERVER_VERSION.deb
 
 ADD container/ /
-ADD https://github.com/alexanderfefelov/kkmserver-dist/raw/main/deb/$KKMSERVER_STUFF /
+ADD https://github.com/kevinblo/kkmserver_dist/raw/main/deb/$KKMSERVER_STUFF /
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get -qq update \
@@ -13,7 +13,7 @@ RUN apt-get -qq update \
        libc6-dev \
        libcurl4 \
        libgdiplus \
-       libicu66 \
+       libicu67 \
        liblttng-ust0 \
        libssl1.1 \
        netcat `# For health checks` \
@@ -26,3 +26,4 @@ RUN apt-get -qq update \
 ENV LANG ru_RU.utf8
 
 CMD ["/opt/kkmserver/kkmserver", "-s"]
+
